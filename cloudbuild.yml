@@ -1,0 +1,36 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['login',
+         '-u',
+         '${_DOCKER_USER}',
+         '-p',
+         '${_DOCKER_PASS}']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build',
+         '--build-arg',
+         'CIRCLE_BRANCH=${_CIRCLE_BRANCH}',
+         '--build-arg',
+         'SERVICE=${_CIRCLE_PROJECT_REPONAME}',
+         '--cache-from=asia.gcr.io/$PROJECT_ID/${_CIRCLE_PROJECT_REPONAME}:${_CIRCLE_SHA1}',
+         '-t',
+         'asia.gcr.io/$PROJECT_ID/${_CIRCLE_PROJECT_REPONAME}:${_CIRCLE_BRANCH}',
+         '-t',
+         'asia.gcr.io/$PROJECT_ID/${_CIRCLE_PROJECT_REPONAME}:${_CIRCLE_SHA1}',
+         '-f',
+         'Dockerfile.cloudbuild',
+         '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["push", "asia.gcr.io/$PROJECT_ID/${_CIRCLE_PROJECT_REPONAME}:${_CIRCLE_SHA1}"]
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['--namespace=${_NAMESPACE}',
+         'set',
+         'image',
+         'deployment',
+         'wheel',
+         '${_CIRCLE_PROJECT_REPONAME}=asia.gcr.io/$PROJECT_ID/${_CIRCLE_PROJECT_REPONAME}:${_CIRCLE_SHA1}',
+         '--record']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=promotion-cluster'
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["push", "asia.gcr.io/$PROJECT_ID/${_CIRCLE_PROJECT_REPONAME}:${_CIRCLE_BRANCH}"]

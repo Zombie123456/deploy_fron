@@ -1,0 +1,6 @@
+FROM nginx:1.13.9
+
+ARG SERVICE
+
+ENV TZ Asia/Singapore
+COPY $SERVICE /usr/src/$SERVICE

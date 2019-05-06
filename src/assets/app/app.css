@@ -1,0 +1,51 @@
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+*{ margin:0; padding:0}
+a{outline:none;text-decoration:none;}
+a:hover{text-decoration:none;}
+html{zoom:1;}
+html *{outline:0;zoom:1;}
+html button::-moz-focus-inner{border-color:transparent!important;}
+body{overflow-x: hidden;font-size: 16px;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+fieldset,a img{border:0;}
+address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal;}
+li{list-style:none;}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+q:before,q:after{content:'';}
+input[type="submit"], input[type="reset"], input[type="button"], button{-webkit-appearance: none;}
+em,i{font-style:normal;}
+
+
+/*这里是组件样式改变*/
+.weui_cells {
+	background-color: #201614!important;
+	margin-top: 6px!important;
+}
+.weui_cell {
+	padding: 0px 4px!important;
+}
+.weui_cell_bd {
+	border: 1px solid #3e3727;
+	border-radius: 5px;
+	padding: 2px;
+	background-color: #3e3727 !important;
+}
+.weui_input {
+	font-size: 12px!important;
+	text-indent: 0.2rem;
+}
+.weui_cells:before {
+	border-top: 1px solid #5f5c5c!important;
+}
+.weui_cells:after {
+	border-bottom: 1px solid #5f5c5c!important;
+}
+.vux-flex-row {
+	margin-top: 1rem;
+}
+.weui_input {
+	text-align: center;
+}
+
+
